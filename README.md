@@ -2,8 +2,8 @@
 This repository contains data, code, and documentation for recreating Group 6's models and analysis of flight delays and cancellations for Module 3 of STAT 628 Fall 2024 at UW-Madison.
 
 To use this repository:
-1. pull the repository
-2. retrieve the raw data from the zip files listed in raw_data.txt
+1. Pull the repository
+2. Retrieve the raw data from the zip files listed in raw_data.txt
 3. Move the raw data into the same directory as the code.
 4. To recreate the models and analyses, run the code in the following order:
     - Run weather.ipynb to preprocess the weather data
