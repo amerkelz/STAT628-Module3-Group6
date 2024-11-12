@@ -3,8 +3,8 @@ This repository contains data, code, and documentation for recreating Group 6's 
 
 To use this repository:
 1. Pull the repository
-2. Retrieve the raw data from the zip files listed in data/raw_data.txt
-3. Move the raw data into the same directory as the code.
+2. Retrieve the raw flight data from the zip files listed in data/raw_data.txt
+3. Move the data directory contents into the same directory as the code.
 4. To recreate the models and analyses, run the code in the following order:
     - Run weather.ipynb to preprocess the weather data
     - Run flight data.Rmd to preprocess the flight data and seperate them into years.
