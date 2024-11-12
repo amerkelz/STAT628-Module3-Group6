@@ -30,7 +30,11 @@ This repository contains data, code, and documentation for recreating Group 6's 
 - final_data.txt: contains URL to access final cleaned data created during Step 4 of using this repository (above). URL can only be accessed by UW-Madison students, faculty, and staff.
 
 ### App Directory Contents:
-
+- app.R: runs the Shiny app UI and server
+- cancel_model.pkl: cancellation model developed in model.ipynb
+- delay_model.pkl: delay model developed in model.ipynb
+- model_predict.py: script containing functions to make cancellation and delay predictions from the models using Shiny app inputs
+- deploy.R: uses rsconnect to upload app to shinyapps.io
 
 ### Images Directory Contents:
    
