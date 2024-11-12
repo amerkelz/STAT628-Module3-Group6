@@ -3,7 +3,7 @@ This repository contains data, code, and documentation for recreating Group 6's 
 
 To use this repository:
 1. Pull the repository
-2. Retrieve the raw data from the zip files listed in raw_data.txt
+2. Retrieve the raw data from the zip files listed in data/raw_data.txt
 3. Move the raw data into the same directory as the code.
 4. To recreate the models and analyses, run the code in the following order:
     - Run weather.ipynb to preprocess the weather data
@@ -15,5 +15,7 @@ To use this repository:
 5. The app folder contains all code used by the Shiny app, including pickle files of the models and python scripts to execute the models in the Shiny app - AMY
     - The Shiny app is hosted at <URL>
     - NOTE: if you use this code to host your own Shiny app, please update the author content information to your own
+
+
     
    
