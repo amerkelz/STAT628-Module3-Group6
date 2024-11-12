@@ -7,7 +7,7 @@ To use this repository:
 3. Move the raw data into the same directory as the code.
 4. To recreate the models and analyses, run the code in the following order:
     - Run weather.ipynb to preprocess the weather data
-    - Run <CODENAME to preprocess the flight data - CHENYU
+    - Run flight data.Rmd to preprocess the flight data and seperate them into years.
     - Run connect_flight_weather.ipynb to process and merge the flight and weather data
     - Run snow_correction.ipynb to add back snowfall data from original raw data
     - Run model.ipynb to develop the cancellation and delay models. Models are saved as pickle files to be used by the Shiny app
