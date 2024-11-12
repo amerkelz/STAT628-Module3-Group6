@@ -1,0 +1,165 @@
+---
+title: "flight data clean"
+author: "chenyu jiang"
+date: "2024-10-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+rm(list=ls())
+# top 100 airports + Madison
+airport <- read.csv("airport_codes_lat_long.csv", stringsAsFactors = FALSE,header = FALSE)
+airport_list <- airport$V1
+```
+
+
+```{r}
+setwd("flight_data_keep")
+#merge 2018 of holiday season
+folders <- c("On_Time_Marketing_Carrier_On_Time_Performance_Beginning_January_2018_2018_11", "On_Time_Marketing_Carrier_On_Time_Performance_Beginning_January_2018_2018_12", "On_Time_Marketing_Carrier_On_Time_Performance_Beginning_January_2018_2019_1") 
+all_data <- list()
+for (folder in folders) {
+  files <- list.files(path = folder, pattern = "\\.csv$", full.names = TRUE)
+  for (file in files) {
+    data <- read.csv(file)  
+    all_data[[file]] <- data  
+  }
+}
+combined_data <- do.call(rbind, all_data)
+
+```
+
+
+```{r}
+#choose those flights that the origin and destination are in top100 or Madison airports.
+filtered_data <- combined_data[combined_data$Origin %in% airport_list, ]
+filtered_data <- filtered_data[filtered_data$Dest %in% airport_list, ]
+filtered_columns <- filtered_data[, c(5, 6, 7, 24, 33, 39, 40, 41, 50, 51, 52, 57, 58, 59, 62, 63, 64, 66, 67, 68, 69, 70)]
+write.csv(filtered_columns, "filtered_2018.csv", row.names = FALSE)
+
+```
+
+
+
+```{r}
+setwd("flight_data_keep")
+#merge 2019 of holiday season
+folders_2019 <- c("On_Time_Marketing_Carrier_On_Time_Performance_Beginning_January_2018_2019_11", "On_Time_Marketing_Carrier_On_Time_Performance_Beginning_January_2018_2019_12", "On_Time_Marketing_Carrier_On_Time_Performance_Beginning_January_2018_2020_1") 
+all_data_2019 <- list()
+for (folder in folders_2019) {
+  files <- list.files(path = folder, pattern = "\\.csv$", full.names = TRUE)
+  for (file in files) {
+    data <- read.csv(file)  
+    all_data_2019[[file]] <- data  
+  }
+}
+combined_data_2019 <- do.call(rbind, all_data_2019)
+
+```
+
+
+```{r}
+#choose those flights that the origin and destination are in top100 or Madison airports.
+filtered_data_2019 <- combined_data_2019[combined_data_2019$Origin %in% airport_list, ]
+filtered_data_2019 <- filtered_data_2019[filtered_data_2019$Dest %in% airport_list, ]
+filtered_columns_2019 <- filtered_data_2019[, c(5, 6, 7, 24, 33, 39, 40, 41, 50, 51, 52, 57, 58, 59, 62, 63, 64, 66, 67, 68, 69, 70)]
+write.csv(filtered_columns_2019, "filtered_2019.csv", row.names = FALSE)
+```
+
+```{r}
+setwd("flight_data_keep")
+#merge 2021 of holiday season
+folders_2021 <- c("On_Time_Marketing_Carrier_On_Time_Performance_Beginning_January_2018_2021_11", "On_Time_Marketing_Carrier_On_Time_Performance_Beginning_January_2018_2021_12", "On_Time_Marketing_Carrier_On_Time_Performance_Beginning_January_2018_2022_1") 
+all_data_2021 <- list()
+for (folder in folders_2021) {
+  files <- list.files(path = folder, pattern = "\\.csv$", full.names = TRUE)
+  for (file in files) {
+    data <- read.csv(file)  
+    all_data_2021[[file]] <- data  
+  }
+}
+combined_data_2021 <- do.call(rbind, all_data_2021)
+```
+
+```{r}
+#choose those flights that the origin and destination are in top100 or Madison airports.
+filtered_data_2021 <- combined_data_2021[combined_data_2021$Origin %in% airport_list, ]
+filtered_data_2021 <- filtered_data_2021[filtered_data_2021$Dest %in% airport_list, ]
+filtered_columns_2021 <- filtered_data_2021[, c(5, 6, 7, 24, 33, 39, 40, 41, 50, 51, 52, 57, 58, 59, 62, 63, 64, 66, 67, 68, 69, 70)]
+write.csv(filtered_columns_2021, "filtered_2021.csv", row.names = FALSE)
+```
+
+
+
+
+
+```{r}
+setwd("flight_data_keep")
+#merge 2022 of holiday season
+folders_2022 <- c("On_Time_Marketing_Carrier_On_Time_Performance_Beginning_January_2018_2022_11", "On_Time_Marketing_Carrier_On_Time_Performance_Beginning_January_2018_2022_12", "On_Time_Marketing_Carrier_On_Time_Performance_Beginning_January_2018_2023_1") 
+all_data_2022 <- list()
+for (folder in folders_2022) {
+  files <- list.files(path = folder, pattern = "\\.csv$", full.names = TRUE)
+  for (file in files) {
+    data <- read.csv(file)  
+    all_data_2022[[file]] <- data  
+  }
+}
+combined_data_2022 <- do.call(rbind, all_data_2022)
+```
+
+```{r}
+#choose those flights that the origin and destination are in top100 or Madison airports.
+filtered_data_2022 <- combined_data_2022[combined_data_2022$Origin %in% airport_list, ]
+filtered_data_2022 <- filtered_data_2022[filtered_data_2022$Dest %in% airport_list, ]
+filtered_columns_2022 <- filtered_data_2022[, c(5, 6, 7, 24, 33, 39, 40, 41, 50, 51, 52, 57, 58, 59, 62, 63, 64, 66, 67, 68, 69, 70)]
+write.csv(filtered_columns_2022, "filtered_2022.csv", row.names = FALSE)
+```
+
+
+```{r}
+setwd("flight_data_keep")
+#merge 2023 of holiday season
+folders_2023 <- c("On_Time_Marketing_Carrier_On_Time_Performance_Beginning_January_2018_2023_11", "On_Time_Marketing_Carrier_On_Time_Performance_Beginning_January_2018_2023_12", "On_Time_Marketing_Carrier_On_Time_Performance_Beginning_January_2018_2024_1") 
+all_data_2023 <- list()
+for (folder in folders_2023) {
+  files <- list.files(path = folder, pattern = "\\.csv$", full.names = TRUE)
+  for (file in files) {
+    data <- read.csv(file)  
+    all_data_2023[[file]] <- data  
+  }
+}
+combined_data_2023 <- do.call(rbind, all_data_2023)
+```
+
+
+```{r}
+#choose those flights that the origin and destination are in top100 or Madison airports.
+filtered_data_2023 <- combined_data_2023[combined_data_2023$Origin %in% airport_list, ]
+filtered_data_2023 <- filtered_data_2023[filtered_data_2023$Dest %in% airport_list, ]
+filtered_columns_2023 <- filtered_data_2023[, c(5, 6, 7, 24, 33, 39, 40, 41, 50, 51, 52, 57, 58, 59, 62, 63, 64, 66, 67, 68, 69, 70)]
+write.csv(filtered_columns_2023, "filtered_2023.csv", row.names = FALSE)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
