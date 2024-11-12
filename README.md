@@ -13,7 +13,7 @@ To use this repository:
     - Run model.ipynb to develop the cancellation and delay models. Models are saved as pickle files to be used by the Shiny app
     - Run <CODENAME to create trend analysis visualizations, which can be found in the images directory - CHENYU
 5. The app folder contains all code used by the Shiny app, including pickle files of the models and python scripts to execute the models in the Shiny app
-    - The Shiny app is hosted at (https://amerkelz.shinyapps.io/628_module3_group6/)
+    - The Shiny app is hosted at https://amerkelz.shinyapps.io/628_module3_group6/
     - NOTE: if you use this code to host your own Shiny app, please update the author content information to your own
 
 
