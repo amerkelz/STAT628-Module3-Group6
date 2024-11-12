@@ -6,11 +6,11 @@ To use this repository:
 2. Retrieve the raw data from the zip files listed in raw_data.txt
 3. Move the raw data into the same directory as the code.
 4. To recreate the models and analyses, run the code in the following order:
-    - Run <CODENAME to preprocess the weather data - YIFAN
+    - Run weather.ipynb to preprocess the weather data
     - Run <CODENAME to preprocess the flight data - CHENYU
-    - Run connect_flight_weather.ipynb to process and merge the flight and weather data - AMY
-    - RUN <CODENAME to add back snowfall data from original raw data - YIFAN
-    - Run <CODENAME to develop the cancellation and delay models. Models are saved as pickle files to be used by the Shiny app - YIFAN
+    - Run connect_flight_weather.ipynb to process and merge the flight and weather data
+    - Run snow_correction.ipynb to add back snowfall data from original raw data
+    - Run model.ipynb to develop the cancellation and delay models. Models are saved as pickle files to be used by the Shiny app
     - Run <CODENAME to create trend analysis visualizations, which can be found in the images directory - CHENYU
 5. The app folder contains all code used by the Shiny app, including pickle files of the models and python scripts to execute the models in the Shiny app - AMY
     - The Shiny app is hosted at <URL>
