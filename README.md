@@ -45,5 +45,7 @@ This repository contains data, code, and documentation for recreating Group 6's 
 - monthly_data_plot.png: shows the cancellation rates in different months in different years
 - cancellation_rate_airlines.png: shows cancellation rates for different airlines and their total number of flights
 - delay_by_airline.png: shows average delay in minutes for different airlines and their total number of flights
+- cancel_model_comparison.png: table comparing 2 models for flight cancellations
+- delay_model_comparison.png: table comparing 4 models for flight delays
 
    
