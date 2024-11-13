@@ -21,7 +21,7 @@ This repository contains data, code, and documentation for recreating Group 6's 
 - flight data.Rmd: preprocess the flight data and separate them into years
 - connect_flight_weather.ipynb: process and merge the flight and weather data
 - snow_correction.ipynb: add back snowfall data from original raw data
-- model.ipynb: develop the cancellation and delay models. The final models are saved as pickle files to be used by the Shiny app
+- model.ipynb: develop the cancellation and delay models. The final models are saved as pickle files to be used by the Shiny app. Also has some data visualization code.
 - final_visualization.Rmd: create trend analysis visualizations, which can be found in the images directory
   
 ### Data Directory Contents: 
@@ -43,5 +43,7 @@ This repository contains data, code, and documentation for recreating Group 6's 
 - delay_by_hour.png: shows the percentage of delay types for different hours
 - Delay_Distribution.png: shows the percentage of different delay types
 - monthly_data_plot.png: shows the cancellation rates in different months in different years
+- cancellation_rate_airlines.png: shows cancellation rates for different airlines and their total number of flights
+- delay_by_airline.png: shows average delay in minutes for different airlines and their total number of flights
 
    
