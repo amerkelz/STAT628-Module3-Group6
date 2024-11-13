@@ -40,6 +40,7 @@ This repository contains data, code, and documentation for recreating Group 6's 
 ### Images Directory Contents:
 - Cancellation_rate_Distribution.png: shows the distribution of cancellation rates for different airports
 - delay_by_day.png: shows the delay types for different days of week
+- delay_by_hour.png: shows the percentage of delay types for different hours
 - Delay_Distribution.png: shows the percentage of different delay types
 - monthly_data_plot.png: shows the cancellation rates in different months in different years
 
