@@ -12,6 +12,7 @@ This repository contains data, code, and documentation for recreating Group 6's 
     4. snow_correction.ipynb
     5. model.ipynb
     6. final_visualization.Rmd
+    7. plots for model selection.ipynb
 5. The app folder contains all code used by the Shiny app, including pickle files of the models and python scripts to execute the models in the Shiny app
     - The Shiny app is hosted at https://amerkelz.shinyapps.io/628_module3_group6/
     - NOTE: if you use this code to host your own Shiny app, please update the author content information to your own
@@ -23,6 +24,7 @@ This repository contains data, code, and documentation for recreating Group 6's 
 - snow_correction.ipynb: add back snowfall data from original raw data
 - model.ipynb: develop the cancellation and delay models. The final models are saved as pickle files to be used by the Shiny app. Also has some data visualization code.
 - final_visualization.Rmd: create trend analysis visualizations, which can be found in the images directory
+- plots for model selection.ipynb: create plots to illustrate model selection and feature analysis
   
 ### Data Directory Contents: 
 - raw flight data.rtf: contains URL to access the raw flight data used by flight data.Rmd. URL can only be accessed by UW-Madison students, faculty, and staff.
