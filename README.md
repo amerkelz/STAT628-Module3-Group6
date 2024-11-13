@@ -11,7 +11,7 @@ This repository contains data, code, and documentation for recreating Group 6's 
     3. connect_flight_weather.ipynb
     4. snow_correction.ipynb
     5. model.ipynb
-    6. CODENAME for data viz - CHENYU
+    6. final_visualization.Rmd
 5. The app folder contains all code used by the Shiny app, including pickle files of the models and python scripts to execute the models in the Shiny app
     - The Shiny app is hosted at https://amerkelz.shinyapps.io/628_module3_group6/
     - NOTE: if you use this code to host your own Shiny app, please update the author content information to your own
@@ -22,7 +22,7 @@ This repository contains data, code, and documentation for recreating Group 6's 
 - connect_flight_weather.ipynb: process and merge the flight and weather data
 - snow_correction.ipynb: add back snowfall data from original raw data
 - model.ipynb: develop the cancellation and delay models. The final models are saved as pickle files to be used by the Shiny app
-- CODENAME: create trend analysis visualizations, which can be found in the images directory - CHENYU
+- final_visualization.Rmd: create trend analysis visualizations, which can be found in the images directory
   
 ### Data Directory Contents: 
 - airport_codes_lat_long.csv: used by flight data.Rmd. Created manually.
@@ -37,4 +37,9 @@ This repository contains data, code, and documentation for recreating Group 6's 
 - deploy.R: uses rsconnect to upload app to shinyapps.io
 
 ### Images Directory Contents:
+- Cancellation_rate_Distribution.png: shows the distribution of cancellation rates for different airports
+- delay_by_day.png: shows the delay types for different days of week
+- Delay_Distribution.png: shows the percentage of different delay types
+- monthly_data_plot.png: shows the cancellation rates in different months in different years
+
    
