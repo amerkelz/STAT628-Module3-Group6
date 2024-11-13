@@ -168,7 +168,7 @@ p5 <- ggplot(df_summary1, aes(x = hour, y = percentage, fill = delay)) +
   ) +
   scale_y_continuous(labels = scales::percent_format()) +
   labs(
-    title = "Percantage of Different Delay Type in Hours",
+    title = "Percentage of Different Delay Type in Hours",
     x = "Hour",
     y = "Percentage",
     fill = "Delay Type"
@@ -182,6 +182,9 @@ p5 <- ggplot(df_summary1, aes(x = hour, y = percentage, fill = delay)) +
 print(p5)
 ggsave("delay_by_hour.png", plot = p5, width = 8, height = 6, dpi = 300)
 ```
+
+
+
 
 
 
