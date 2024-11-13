@@ -1,0 +1,146 @@
+---
+title: "final_visualization"
+author: "chenyu jiang"
+date: "2024-11-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+rm(list=ls())
+```
+
+
+```{r}
+library(dplyr)
+library(ggplot2)
+
+data <- read.csv("flight_weather.csv")
+
+data$month <- ifelse(substr(data[[2]], 6, 7) == "11", "November",
+                             ifelse(substr(data[[2]], 6, 7) == "12", "December",
+                                    ifelse(substr(data[[2]], 6, 7) == "01", "January", NA)))
+
+data$year <- ifelse(substr(data[[2]], 1, 7) == "2018-11" | substr(data[[2]], 1, 7) == "2018-12" | substr(data[[2]], 1, 7) == "2019-01", "2018",
+                             ifelse(substr(data[[2]], 1, 7) == "2019-11" | substr(data[[2]], 1, 7) == "2019-12" | substr(data[[2]], 1, 7) == "2020-01","2019",
+                                    ifelse(substr(data[[2]], 1, 7) == "2021-11" | substr(data[[2]], 1, 7) == "2021-12" | substr(data[[2]], 1, 7) == "2022-01", "2021", 
+                                           ifelse(substr(data[[2]], 1, 7) == "2022-11" | substr(data[[2]], 1, 7) == "2022-12" | substr(data[[2]], 1, 7) == "2023-01", "2022", 
+                                                  ifelse(substr(data[[2]], 1, 7) == "2023-11" | substr(data[[2]], 1, 7) == "2023-12" | substr(data[[2]], 1, 7) == "2024-01", "2023", NA)))))
+
+data$CRSDepTime <- sprintf("%04d", as.integer(data$CRSDepTime))
+data$hour <- substr(data[["CRSDepTime"]],1,2)
+
+data$delay <- ifelse(data[["ArrDelay"]] <= 0, "No Delay or Early Arrival",
+                             ifelse(data[["ArrDelay"]] >= 60, "Long Delay(> 60 mins)", "Short delay(0-60 mins)"))
+df_clean <- subset(data, !is.na(delay))
+```
+
+
+Figure 1
+```{r}
+cancellation_rate2 <- data %>%
+  group_by(Origin) %>%
+  summarize(cancelled_proportion2 = mean(Cancelled), .groups = "drop")
+
+p3 <- ggplot(cancellation_rate2, aes(x = cancelled_proportion2)) +
+  geom_histogram(bins = 20, fill = "skyblue", color = "black", alpha = 0.5) +
+  geom_density(aes(y = after_stat(density * length(cancellation_rate2$cancelled_proportion2) / 500)), 
+               color = "red", size = 1) +
+  labs(
+    title = "Distribution of Airport Cancellation Rates",
+    x = "Cancellation Rate",
+    y = "Frequency"
+  ) +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    axis.title.y = element_text(angle = 360, vjust = 0.5, hjust = 0.5),  # rotate y axis lable
+    plot.background = element_rect(fill = "white", color = NA)
+  )
+
+print(p3)
+ggsave("Cancellation_rate_Distribution.png", plot = p3, width = 8, height = 6, dpi = 300)
+
+```
+
+Figure 2
+```{r}
+cancellation_rate7 <- data %>%
+  group_by(year,month) %>%
+  summarize(cancelled_proportion7 = mean(Cancelled), .groups = "drop")
+
+cancellation_rate7$month <- factor(cancellation_rate7$month, levels = c("November", "December", "January"))
+
+p <- ggplot(cancellation_rate7 , aes(x = year, y =cancelled_proportion7, fill = month)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+  labs(title = "Proportion of Cancellation in Holiday Season ", x = "Year", y = "Proportion of Cancellation(%)") +
+  theme_minimal()+
+  theme(
+    legend.position = "inside",
+    legend.position.inside = c(0.2, 0.8),
+    axis.title.y = element_text(angle = 360, vjust = 0.5, hjust = 0.5),  # rotate y axis lable
+    legend.background = element_rect(fill = "white", color = "black"),
+    plot.background = element_rect(fill = "white", color = NA)
+  )
+print(p)
+ggsave("monthly_data_plot.png", plot = p, width = 8, height = 6, dpi = 300)
+```
+
+Figure 3
+```{r}
+cancellation_rate1 <- df_clean %>%
+  group_by(DayOfWeek, delay) %>%
+  summarize(Count = n(), .groups = "drop")
+
+cancellation_rate1$delay <- factor(cancellation_rate1$delay, levels = c("No Delay or Early Arrival", "Short delay(0-60 mins)", "Long Delay(> 60 mins)"))
+
+cancellation_rate1$DayOfWeek <- factor(cancellation_rate1$DayOfWeek,levels = c(1,2,3,4,5,6,7) , labels = c("Monday", "Tuesday", "Wednesday","Thursday","Friday","Saturday","Sunday"))
+
+p1 <- ggplot(cancellation_rate1 , aes(x = DayOfWeek, y = Count,fill = delay)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+  labs(title = "Count Delay by Day of Week", x = "Day of week", y = "Count") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    axis.title.y = element_text(angle = 360, vjust = 0.5, hjust = 0.5),  # rotate y axis lable
+    legend.background = element_rect(fill = "white", color = "black"),
+    plot.background = element_rect(fill = "white", color = NA)
+  )
+print(p1)
+ggsave("delay_by_day.png", plot = p1, width = 8, height = 6, dpi = 300)
+```
+
+Figure 4
+```{r}
+market_summary <- df_clean %>%
+  group_by(delay) %>%
+  summarise(Count = n()) %>%
+  ungroup()
+
+market_summary$delay <- factor(market_summary$delay, levels = c("No Delay or Early Arrival", "Short delay(0-60 mins)", "Long Delay(> 60 mins)"))
+
+origin_data <- market_summary %>%
+    mutate(Percentage = round(Count / sum(Count) * 100, 1),
+           Label =  paste0( Percentage, "%"))
+
+p2 <- ggplot(origin_data, aes(x = "", y = Count, fill = delay)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar(theta = "y") +
+  labs(title ="Delay Distribution",x = NULL, y = NULL) +
+  theme_void() +
+  theme(legend.title = element_blank(),
+        plot.title = element_text(hjust = 0.5),
+        legend.background = element_rect(fill = "white", color = "black"),
+        plot.background = element_rect(fill = "white", color = NA))+
+  geom_text(aes(label = Label), position = position_stack(vjust = 0.5), color = "white", size = 4)
+
+print(p2)
+ggsave("Delay_Distribution.png", plot = p2, width = 8, height = 6, dpi = 300)
+```
+
+
+
+
