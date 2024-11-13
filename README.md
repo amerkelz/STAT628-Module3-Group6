@@ -25,7 +25,7 @@ This repository contains data, code, and documentation for recreating Group 6's 
 - final_visualization.Rmd: create trend analysis visualizations, which can be found in the images directory
   
 ### Data Directory Contents: 
-- raw flight data
+- raw flight data.rtf: contains URL to access the raw flight data used by flight data.Rmd. URL can only be accessed by UW-Madison students, faculty, and staff.
 - airport_codes_lat_long.csv: used by flight data.Rmd. Created manually.
 - airport_timezone.csv: used by connect_flight_weather.ipynb. Created manually.
 - final_data.txt: contains URL to access final cleaned data created during Step 4 of using this repository (above). URL can only be accessed by UW-Madison students, faculty, and staff.
