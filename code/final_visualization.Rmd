@@ -31,7 +31,9 @@ data$year <- ifelse(substr(data[[2]], 1, 7) == "2018-11" | substr(data[[2]], 1, 
                                                   ifelse(substr(data[[2]], 1, 7) == "2023-11" | substr(data[[2]], 1, 7) == "2023-12" | substr(data[[2]], 1, 7) == "2024-01", "2023", NA)))))
 
 data$CRSDepTime <- sprintf("%04d", as.integer(data$CRSDepTime))
-data$hour <- substr(data[["CRSDepTime"]],1,2)
+data$hour <- ifelse(data[["CRSDepTime"]] <= "06", "Midnight Flight(0:00-6:00)",
+                             ifelse(data[["CRSDepTime"]] <= "12", "Morning Flight(6:00-12:00)",
+                                    ifelse(data[["CRSDepTime"]] <= "18", "Normal Flight(12:00-18:00)", "Night Flight(18:00-24:00)")))
 
 data$delay <- ifelse(data[["ArrDelay"]] <= 0, "No Delay or Early Arrival",
                              ifelse(data[["ArrDelay"]] >= 60, "Long Delay(> 60 mins)", "Short delay(0-60 mins)"))
@@ -141,6 +143,45 @@ print(p2)
 ggsave("Delay_Distribution.png", plot = p2, width = 8, height = 6, dpi = 300)
 ```
 
+Figure 5
+```{r}
+df_summary1 <- df_clean %>%
+  group_by(hour, delay) %>%
+  summarise(count = n(),.groups = "drop")
+
+df_summary1 <- df_summary1 %>%
+  group_by(hour) %>%
+  mutate(percentage = count / sum(count), .groups = "drop")
+
+df_summary1$delay <- factor(df_summary1$delay, levels = c("No Delay or Early Arrival", "Short delay(0-60 mins)", "Long Delay(> 60 mins)"))
+
+df_summary1$hour <- factor(df_summary1$hour,levels = c("Midnight Flight(0:00-6:00)","Morning Flight(6:00-12:00)","Normal Flight(12:00-18:00)","Night Flight(18:00-24:00)"))
+
+
+p5 <- ggplot(df_summary1, aes(x = hour, y = percentage, fill = delay)) +
+  geom_bar(stat = "identity", position = "fill") +
+  geom_text(
+    aes(label = scales::percent(percentage, accuracy = 0.1)),
+    position = position_fill(vjust = 0.5),
+    color = "white",
+    size = 3.5
+  ) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(
+    title = "Percantage of Different Delay Type in Hours",
+    x = "Hour",
+    y = "Percentage",
+    fill = "Delay Type"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+      plot.title = element_text(hjust = 0.5),
+      axis.title.y = element_text(angle = 360, vjust = 0.5, hjust = 0.5),  # rotate y axis lable
+      legend.background = element_rect(fill = "white", color = "black"),
+      plot.background = element_rect(fill = "white", color = NA))
+print(p5)
+ggsave("delay_by_hour.png", plot = p5, width = 8, height = 6, dpi = 300)
+```
 
 
 
