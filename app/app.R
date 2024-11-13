@@ -51,14 +51,14 @@ ui <- page_fluid(
              selectInput(
                "vis_origin",
                "Visibility at Departure Airport:",
-               choices = list("Low Visibility", "Some Visibility", "Clear Skies"),
-               selected = "Clear Skies"
+               choices = list("Low Visibility (< 6 mi)", "Some Visibility (6 - 15 mi)", "Clear Skies (16+ mi)"),
+               selected = "Clear Skies (16+ mi)"
              ),
              selectInput(
                "wind_dest",
                "Wind at Arrival Airport:",
-               choices = list("Calm", "Some Wind", "Very Windy"),
-               selected = "Calme"
+               choices = list("Calm (< 4 mph)", "Some Wind (4 - 9 mph)", "Very Windy (10+ mph)"),
+               selected = "Calm (< 4 mph)"
              )
            ),
            helpText("",br(),""),
